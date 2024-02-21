@@ -128,13 +128,17 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-		params = {}
+		args_dict = {}
     	for arg in my_arguments[1:]:
         	split_arg = arg.split('=')
         	if len(split_arg) != 2:
             	continue
         	key, value = split_arg
+			if value.startswith('"') and value.endswith('"'):
+            value = value[1:-1].replace('_', ' ')
+        args_dict[key] = value
         new_instance = HBNBCommand.classes[args]()
+
         storage.save()
         print(new_instance.id)
         storage.save()
