@@ -121,6 +121,11 @@ class HBNBCommand(cmd.Cmd):
         elif args not in HBNBCommand.classes:
             print("** class doesn't exist **")
             return
+        arguments = args.split
+        class_name = arguments[0]
+        if class_name not in HBNBCommand.classes:
+            print("** class doesn't exist **")
+            return
         new_instance = HBNBCommand.classes[args]()
         storage.save()
         print(new_instance.id)
@@ -140,6 +145,7 @@ class HBNBCommand(cmd.Cmd):
         # guard against trailing args
         if c_id and ' ' in c_id:
             c_id = c_id.partition(' ')[0]
+
 
         if not c_name:
             print("** class name missing **")
